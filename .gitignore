@@ -1,0 +1,9 @@
+# mugyu temp files
+*.status.json
+
+# MacOS
+.DS_Store
+
+# Others
+serve/
+lab/
