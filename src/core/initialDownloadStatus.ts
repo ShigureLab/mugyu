@@ -37,4 +37,6 @@ export async function initialDownloadStatus(
       completedBytes: 0,
     })
   }
+  // Close Stream
+  await response.arrayBuffer()
 }

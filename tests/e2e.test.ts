@@ -4,14 +4,14 @@ import { hashFile, hashBuffer } from '../src/utils.ts'
 
 Deno.test('End to end test', async () => {
   // TODO: 文件服务器也在这里开
-  const filePath = './testFile.dat'
-  const downloadToPath = './testFileReDownloaded.dat'
+  const filePath = './testFile.bin'
+  const downloadToPath = './testFileReDownloaded.bin'
   const testData = Uint8Array.from([0, 3, 56, 4, 4, 1])
   const md5HashHex = hashBuffer(testData)
   Deno.writeFileSync(filePath, testData)
 
   await mugyu({
-    url: 'http://localhost:5000/testFile.dat',
+    url: 'http://localhost:5000/testFile.bin',
     path: downloadToPath,
     blockSize: 10 * 1024 * 1024,
   })

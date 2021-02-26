@@ -6,9 +6,9 @@
 
 # Others
 serve/
-lab/
+expriments/
 
 # Test Downloads
 *.zip
 *.dmg
-*.dat
+*.bin
