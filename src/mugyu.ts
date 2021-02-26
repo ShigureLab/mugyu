@@ -1,5 +1,6 @@
 import { fakeUAHeaders } from './core/resolveHeader.ts'
 import { donothingHook, combineHooks } from './core/resolveHooks.ts'
+import { StandbyFunction, PromisePool } from './core/limitParallel.ts'
 import { fetchRange } from './fetcher.ts'
 import type {
   Plugin,
@@ -63,8 +64,7 @@ export class Mugyu {
         .map((plugin) => plugin.onProcessChunk)
         .filter((hook): hook is Hook<ProcessChunkOptions> => !!hook)
     )
-
-    await Promise.all(
+    const pool = new PromisePool(
       this.status.segments.map((segment) => {
         const processChunk = async (chunk: Uint8Array) => {
           return await processChunkHook({
@@ -73,7 +73,8 @@ export class Mugyu {
             context: this.context,
           })
         }
-        return fetchRange(
+        return StandbyFunction.wrap(
+          fetchRange,
           this.url,
           this.headers,
           [segment.firstByte + segment.completedBytes, segment.lastByte],
@@ -81,6 +82,7 @@ export class Mugyu {
         )
       })
     )
+    await pool.run()
 
     const onDownloadedHook = combineHooks<MugyuContext>(
       ...this.plugins
