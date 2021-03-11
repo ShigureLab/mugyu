@@ -80,21 +80,19 @@ function resolveProgressBar(
   )
 }
 
-function sizeFormat(size: number, ndigits = 2) {
+function sizeFormat(size: number, ndigits = 2, baseUnitSize = 2 ** 10) {
   const flag = size < 0 ? '-' : ''
   size = Math.abs(size)
-  const units = ['Bytes', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB', 'BB']
-  let index = units.length - 1
-  let unit = ''
-  let unitSize = 0
+  const unitList =
+    baseUnitSize === 2 ** 10
+      ? ['Bytes', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB', 'BiB']
+      : ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB', 'BB']
+  let index = unitList.length - 1
   while (index >= 0) {
-    unitSize = 2 ** (index * 10)
-    if (size >= unitSize) {
-      unit = units[index]
+    if (size >= baseUnitSize ** index) {
       break
     }
     index -= 1
   }
-
-  return `${flag}${(size / unitSize).toFixed(ndigits)} ${unit}`
+  return `${flag}${(size / baseUnitSize ** index).toFixed(ndigits)} ${unitList[index]}`
 }
