@@ -1,7 +1,7 @@
 import type { DownloadStatus, MugyuContext, Plugin, ProcessChunkOptions } from '../core/types.ts'
 import { initialDownloadStatus } from '../core/initialDownloadStatus.ts'
 import { jsonDumpSync, jsonLoadSync, makeEmptyFile, writeFileWithOffset } from '../utils.ts'
-import { exists } from '../../deps.ts'
+import { exists } from '../utils.ts'
 
 export interface PluginSaveToDiskOptions {
   path: string

@@ -43,3 +43,34 @@ export async function hashBuffer(data: Uint8Array): Promise<string> {
 export async function hashFile(file: string): Promise<string> {
   return hashBuffer(Deno.readFileSync(file))
 }
+
+/**
+ * @see https://deno.land/std@0.119.0/fs/exists.ts
+ */
+export async function exists(filePath: string): Promise<boolean> {
+  try {
+    await Deno.lstat(filePath)
+    return true
+  } catch (err) {
+    if (err instanceof Deno.errors.NotFound) {
+      return false
+    }
+
+    throw err
+  }
+}
+
+/**
+ * @see https://deno.land/std@0.119.0/fs/exists.ts
+ */
+export function existsSync(filePath: string): boolean {
+  try {
+    Deno.lstatSync(filePath)
+    return true
+  } catch (err) {
+    if (err instanceof Deno.errors.NotFound) {
+      return false
+    }
+    throw err
+  }
+}
