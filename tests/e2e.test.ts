@@ -7,7 +7,7 @@ Deno.test('End to end test', async () => {
   const filePath = './testFile.bin'
   const downloadToPath = './testFileReDownloaded.bin'
   const testData = Uint8Array.from([0, 3, 56, 4, 4, 1])
-  const md5HashHex = hashBuffer(testData)
+  const md5HashHex = await hashBuffer(testData)
   Deno.writeFileSync(filePath, testData)
 
   await mugyu({
@@ -16,6 +16,6 @@ Deno.test('End to end test', async () => {
     blockSize: 10 * 1024 * 1024,
   })
   const reDownloadedData = Deno.readFileSync(downloadToPath)
-  const downloadedMd5HashHex = hashFile(downloadToPath)
+  const downloadedMd5HashHex = await hashFile(downloadToPath)
   assertEquals(downloadedMd5HashHex, md5HashHex)
 })

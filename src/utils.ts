@@ -1,4 +1,4 @@
-import { createHash } from '../deps.ts'
+import { crypto } from '../deps.ts'
 
 export async function jsonDump(data: any, path: string, indent = 0): Promise<void> {
   await Deno.writeTextFile(path, JSON.stringify(data, null, indent))
@@ -33,12 +33,13 @@ export function print(...args: any[]): void {
   Deno.writeSync(rid, new TextEncoder().encode(output))
 }
 
-export function hashBuffer(data: Uint8Array): string {
-  const hash = createHash('md5')
-  hash.update(data)
-  return hash.toString()
+export async function hashBuffer(data: Uint8Array): Promise<string> {
+  const hashBuffer = await crypto.subtle.digest('MD5', data)
+  const hashArray = Array.from(new Uint8Array(hashBuffer)) // convert buffer to byte array
+  const hashHex = hashArray.map((b) => b.toString(16).padStart(2, '0')).join('') // convert bytes to hex string
+  return hashHex
 }
 
-export function hashFile(file: string): string {
+export async function hashFile(file: string): Promise<string> {
   return hashBuffer(Deno.readFileSync(file))
 }
