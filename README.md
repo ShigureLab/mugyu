@@ -1,4 +1,4 @@
-# Mygyu <sup>[Experimental]</sup>
+# Mugyu <sup>[Experimental]</sup>
 
 A simple file downloader.
 
