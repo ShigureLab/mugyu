@@ -1,0 +1,16 @@
+name: deno-lint-action
+
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  linter_name:
+    name: deno-lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+      - name: Check files using the deno lint
+        run: |
+          deno lint

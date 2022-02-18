@@ -1,3 +1,4 @@
+// deno-lint-ignore-file no-explicit-any
 import { crypto } from '../deps.ts'
 
 export async function jsonDump(data: any, path: string, indent = 0): Promise<void> {
@@ -41,7 +42,7 @@ export async function hashBuffer(data: Uint8Array): Promise<string> {
 }
 
 export async function hashFile(file: string): Promise<string> {
-  return hashBuffer(Deno.readFileSync(file))
+  return hashBuffer(await Deno.readFile(file))
 }
 
 /**

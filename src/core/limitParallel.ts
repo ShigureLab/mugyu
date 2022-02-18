@@ -1,3 +1,5 @@
+// deno-lint-ignore-file no-explicit-any
+
 export class StandbyFunction<T extends Array<any>> {
   constructor(private func: (...args: T) => Promise<void>, private args: T) {
     this.call = this.call.bind(this)

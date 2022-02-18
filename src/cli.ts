@@ -29,7 +29,3 @@ program
 function parseBlockSize(option: string) {
   return parseInt(option) * 1024 * 1024
 }
-
-function parseBoolean(option: string) {
-  return !!option
-}

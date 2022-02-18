@@ -3,6 +3,7 @@ export function inferFileName(url: string): string {
   return fileName
 }
 
+// deno-lint-ignore no-explicit-any
 export const isObject = (val: unknown): val is Record<any, any> =>
   val !== null && typeof val === 'object'
 

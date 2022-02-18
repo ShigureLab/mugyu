@@ -1,5 +1,5 @@
 import { fakeUAHeaders } from './core/resolveHeader.ts'
-import { donothingHook, combineHooks } from './core/resolveHooks.ts'
+import { combineHooks } from './core/resolveHooks.ts'
 import { StandbyFunction, PromisePool } from './core/limitParallel.ts'
 import { fetchRange } from './fetcher.ts'
 import type {

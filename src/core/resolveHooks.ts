@@ -1,5 +1,6 @@
-import { Hook, HookName, PromiseOrNot } from './types.ts'
+import { Hook } from './types.ts'
 
+// deno-lint-ignore no-explicit-any
 export const donothingHook: Hook<any> = (arg?) => arg
 
 export function combineHooks<T>(...hooks: Array<Hook<T>>): Hook<T> {
