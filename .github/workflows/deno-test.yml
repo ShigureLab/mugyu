@@ -16,5 +16,5 @@ jobs:
           deno test --allow-all
       - name: e2e test
         run: |
-          deno run --allow-all src/cli.ts fetch -o mod.test.ts -i file:///Users/nyakku/Projects/mugyu/mod.ts
+          deno run --allow-all src/cli.ts fetch -o mod.test.ts -i file://$(pwd)/mod.ts
           rm mod.test.ts
