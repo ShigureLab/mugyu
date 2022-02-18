@@ -1,0 +1,20 @@
+name: deno-test-action
+
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  linter_name:
+    name: deno-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+      - name: Run all tests
+        run: |
+          deno test --allow-all
+      - name: e2e test
+        run: |
+          deno run --allow-all src/cli.ts fetch -o mod.test.ts -i file:///Users/nyakku/Projects/mugyu/mod.ts
+          rm mod.test.ts

@@ -1,18 +1,40 @@
-import { assertEquals } from '../deps.ts'
+import { assertEquals, path } from '../deps.ts'
 import { Mugyu } from '../src/mugyu.ts'
 import createPluginSaveToDisk from '../src/plugins/pluginSaveToDisk.ts'
+import { createRandomFile } from './utils.ts'
+import { existsSync, hashFile } from '../src/utils.ts'
 
 Deno.test('plugin save to disk test', async () => {
+  const fileName = 'pluginSaveToDisk.origin.test.bin'
+  const outName = 'pluginSaveToDisk.output.test.bin'
+  const thisFileUrl = import.meta.url
+  const fileUrl = path.join(path.dirname(path.dirname(thisFileUrl)), fileName)
+  const md5 = await createRandomFile(fileName)
+
+  if (existsSync(outName)) {
+    await Deno.remove(outName)
+  }
+
   const fetcher = new Mugyu({
-    url: 'http://localhost:5000/serve/test.dmg',
+    url: fileUrl,
     blockSize: 64 * 1024 * 1024,
     plugins: [
       createPluginSaveToDisk({
-        path: 'test.dmg',
+        path: outName,
       }),
     ],
   })
 
   await fetcher.prepare()
   await fetcher.download()
+
+  const md5Out = await hashFile(outName)
+  assertEquals(md5, md5Out)
+
+  if (existsSync(fileName)) {
+    await Deno.remove(fileName)
+  }
+  if (existsSync(outName)) {
+    await Deno.remove(outName)
+  }
 })
