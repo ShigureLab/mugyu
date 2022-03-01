@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Setup repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: 'setup' # check: https://github.com/actions/virtual-environments/issues/1777
         uses: denolib/setup-deno@v2
