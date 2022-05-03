@@ -5,8 +5,8 @@ import { existsSync } from '../src/utils.ts'
 import createPluginProgress from '../src/plugins/pluginProgress.ts'
 
 Deno.test('plugin progress test', async () => {
-  const fileName = 'pluginSaveToDisk.origin.test.bin'
-  const outName = 'pluginSaveToDisk.output.test.bin'
+  const fileName = 'pluginProgress.origin.test.bin'
+  const outName = 'pluginProgress.output.test.bin'
   const thisFileUrl = import.meta.url
   const fileUrl = path.join(path.dirname(path.dirname(thisFileUrl)), fileName)
   await createRandomFile(fileName)

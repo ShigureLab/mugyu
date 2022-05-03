@@ -1,0 +1,6 @@
+{
+  "tasks": {
+    "test": "deno test --allow-all --jobs 4",
+    "test:e2e": "deno run --allow-all src/cli.ts fetch -o mod.test.ts -i file://$(pwd)/mod.ts && rm mod.test.ts"
+  }
+}
