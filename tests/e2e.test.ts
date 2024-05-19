@@ -1,4 +1,5 @@
-import { assertEquals, path } from '../deps.ts'
+import * as path from '@std/path'
+import { assertEquals } from '@std/assert'
 import { mugyu } from '../src/mugyu.ts'
 import { existsSync, hashFile } from '../src/utils.ts'
 import { createRandomFile } from './utils.ts'

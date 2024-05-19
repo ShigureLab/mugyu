@@ -1,6 +1,6 @@
 import type { Plugin, ProcessChunkOptions } from '../core/types.ts'
 import { print } from '../utils.ts'
-import { green, bgWhite } from '../../deps.ts'
+import { green, bgWhite } from '@std/fmt/colors'
 
 export interface PluginProgressOptions {
   progressBarLength?: number

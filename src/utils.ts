@@ -1,5 +1,5 @@
 // deno-lint-ignore-file no-explicit-any
-import { crypto } from '../deps.ts'
+import { crypto } from '@std/crypto'
 
 export async function jsonDump(data: any, path: string, indent = 0): Promise<void> {
   await Deno.writeTextFile(path, JSON.stringify(data, null, indent))

@@ -1,4 +1,4 @@
-import { path } from '../deps.ts'
+import * as path from '@std/path'
 import { Mugyu } from '../src/mugyu.ts'
 import { createRandomFile } from './utils.ts'
 import { existsSync } from '../src/utils.ts'

@@ -1,4 +1,5 @@
-import { Command, resolve } from '../deps.ts'
+import { Command } from '../deps.ts'
+import { resolve } from '@std/path'
 import { existsSync } from './utils.ts'
 import { mugyu } from './mugyu.ts'
 import { inferFileName } from './shared.ts'

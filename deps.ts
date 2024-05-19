@@ -1,7 +1,1 @@
 export { default as Command } from 'https://deno.land/x/denomander@0.9.3/mod.ts'
-export { crypto } from 'https://deno.land/std@0.175.0/crypto/mod.ts'
-export { resolve } from 'https://deno.land/std@0.175.0/path/mod.ts'
-export { green, bgWhite } from 'https://deno.land/std@0.175.0/fmt/colors.ts'
-export { sprintf } from 'https://deno.land/std@0.175.0/fmt/printf.ts'
-export { assertEquals } from 'https://deno.land/std@0.175.0/testing/asserts.ts'
-export * as path from 'https://deno.land/std@0.175.0/path/mod.ts'
