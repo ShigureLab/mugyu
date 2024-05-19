@@ -23,15 +23,14 @@ export function makeEmptyFile(path: string, size: number) {
 
 export function writeFileWithOffset(path: string, data: Uint8Array, offset = 0): void {
   const file = Deno.openSync(path, { write: true })
-  Deno.seekSync(file.rid, offset, Deno.SeekMode.Start)
-  Deno.writeSync(file.rid, data)
-  Deno.close(file.rid)
+  file.seekSync(offset, Deno.SeekMode.Start)
+  file.writeSync(data)
+  file.close()
 }
 
 export function print(...args: any[]): void {
   const output = args.map((arg) => arg.toString()).join(' ')
-  const { rid } = Deno.stdout
-  Deno.writeSync(rid, new TextEncoder().encode(output))
+  Deno.stdout.writeSync(new TextEncoder().encode(output))
 }
 
 export async function hashBuffer(data: Uint8Array): Promise<string> {
