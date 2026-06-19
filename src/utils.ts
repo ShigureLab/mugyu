@@ -34,9 +34,8 @@ export function print(...args: any[]): void {
 }
 
 export async function hashBuffer(data: Uint8Array): Promise<string> {
-  const digestInput = new Uint8Array(data.byteLength)
-  digestInput.set(data)
-  const hashBuffer = await crypto.subtle.digest('MD5', digestInput)
+  const dataCopy = new Uint8Array(data)
+  const hashBuffer = await crypto.subtle.digest('MD5', dataCopy)
   const hashArray = Array.from(new Uint8Array(hashBuffer)) // convert buffer to byte array
   const hashHex = hashArray.map((b) => b.toString(16).padStart(2, '0')).join('') // convert bytes to hex string
   return hashHex
